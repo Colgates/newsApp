@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		8D1503DB26D3E02000E9D6F1 /* APICredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1503DA26D3E02000E9D6F1 /* APICredentials.swift */; };
 		8D1503DE26D3E37600E9D6F1 /* HomeViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1503DD26D3E37600E9D6F1 /* HomeViewControllerViewModel.swift */; };
 		8D295EF72665200700824335 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D295EF62665200700824335 /* NewsModel.swift */; };
+		8DF0B1EE272C076100028A9A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8DF0B1ED272C076100028A9A /* SDWebImage */; };
 		8DF8357E265FDB9A00E5527E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF8357D265FDB9A00E5527E /* AppDelegate.swift */; };
 		8DF83580265FDB9A00E5527E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF8357F265FDB9A00E5527E /* SceneDelegate.swift */; };
 		8DF83582265FDB9A00E5527E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF83581265FDB9A00E5527E /* HomeViewController.swift */; };
@@ -41,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DF0B1EE272C076100028A9A /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +140,9 @@
 			dependencies = (
 			);
 			name = NewsApp;
+			packageProductDependencies = (
+				8DF0B1ED272C076100028A9A /* SDWebImage */,
+			);
 			productName = NewsApp;
 			productReference = 8DF8357A265FDB9A00E5527E /* NewsApp.app */;
 			productType = "com.apple.product-type.application";
@@ -165,6 +170,9 @@
 				Base,
 			);
 			mainGroup = 8DF83571265FDB9A00E5527E;
+			packageReferences = (
+				8DF0B1EC272C076100028A9A /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 8DF8357B265FDB9A00E5527E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -393,6 +401,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8DF0B1EC272C076100028A9A /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8DF0B1ED272C076100028A9A /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DF0B1EC272C076100028A9A /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8DF83572265FDB9A00E5527E /* Project object */;
 }

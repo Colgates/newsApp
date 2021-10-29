@@ -5,6 +5,7 @@
 //  Created by Evgenii Kolgin on 27.05.2021.
 //
 
+import SDWebImage
 import UIKit
 
 class NewsTableViewCell: UITableViewCell {
@@ -47,56 +48,51 @@ class NewsTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(newsTitleLabel)
-        contentView.addSubview(subtitleLabel)
-        contentView.addSubview(newsImageView)
-        contentView.addSubview(sourceLabel)
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))
+    private func setupConstraints() {
+        contentView.addSubview(newsTitleLabel)
+        contentView.addSubview(subtitleLabel)
+        contentView.addSubview(newsImageView)
+        contentView.addSubview(sourceLabel)
+
+        newsTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        newsImageView.translatesAutoresizingMaskIntoConstraints = false
+        sourceLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        
-        newsImageView.frame = CGRect(x: 10,
-                                     y: 0,
-                                     width: contentView.frame.size.width - 20,
-                                     height: 160)
-        newsTitleLabel.frame = CGRect(x: 10,
-                                      y: 165,
-                                      width: contentView.frame.size.width - 20,
-                                      height: 40)
-        subtitleLabel.frame = CGRect(x: 10,
-                                     y: 205,
-                                     width: contentView.frame.size.width - 20,
-                                     height: 40)
-        sourceLabel.frame = CGRect(x: 10,
-                                   y: 245,
-                                   width: contentView.frame.size.width - 20,
-                                   height: 40)
+        NSLayoutConstraint.activate([
+            newsImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            newsImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            newsImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            newsImageView.heightAnchor.constraint(equalToConstant: 200),
+            
+            newsTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            newsTitleLabel.topAnchor.constraint(equalTo: newsImageView.bottomAnchor, constant: 5),
+            newsTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            
+            subtitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            subtitleLabel.topAnchor.constraint(equalTo: newsTitleLabel.bottomAnchor, constant: 5),
+            subtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            
+            sourceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            sourceLabel.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 5),
+            sourceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            sourceLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+        ])
     }
     
     func configure(with viewmodel: Article) {
         newsTitleLabel.text = viewmodel.title
         subtitleLabel.text = viewmodel.description
         sourceLabel.text = viewmodel.source.name
-        
-        
         if let url = viewmodel.urlToImage {
-            guard let url = URL(string: url) else { return }
-            
-            URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-                guard let data = data, error == nil else { return }
-
-                DispatchQueue.main.async {
-                    self?.newsImageView.image = UIImage(data: data)
-                }
-            }
-            .resume()
+            newsImageView.sd_setImage(with: URL(string: url))
         }
     }
 }

@@ -12,6 +12,8 @@ class HomeViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView()
+        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
         tableView.separatorStyle = .none
         return tableView
@@ -49,12 +51,12 @@ class HomeViewController: UIViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier, for: indexPath) as? NewsTableViewCell else { return UITableViewCell()}
             cell.configure(with: model)
             
-            let shadowPath = UIBezierPath(rect: cell.bounds)
-            cell.layer.masksToBounds = false
-            cell.layer.shadowColor = UIColor.black.cgColor
-            cell.layer.shadowOffset = CGSize(width: CGFloat(1.0), height: CGFloat(3.0))
-            cell.layer.shadowOpacity = 0.5
-            cell.layer.shadowPath = shadowPath.cgPath
+//            let shadowPath = UIBezierPath(rect: cell.bounds)
+//            cell.layer.masksToBounds = false
+//            cell.layer.shadowColor = UIColor.black.cgColor
+//            cell.layer.shadowOffset = CGSize(width: CGFloat(1.0), height: CGFloat(3.0))
+//            cell.layer.shadowOpacity = 0.5
+//            cell.layer.shadowPath = shadowPath.cgPath
             
             return cell
         })
@@ -80,10 +82,10 @@ extension HomeViewController: UITableViewDelegate {
         let vc = SFSafariViewController(url: url)
         present(vc, animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 320
-    }
+//
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 320
+//    }
 }
 
 //MARK: - SearchBar Delegate
